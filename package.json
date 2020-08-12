@@ -1,0 +1,11 @@
+{
+  "name": "guard-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/key-co/guard",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord-ts-kit": "^1.0.0"
+  }
+}
