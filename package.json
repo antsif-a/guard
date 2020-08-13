@@ -1,5 +1,6 @@
 {
   "name": "guard-bot",
+  "description": "Guard is a Discord bot built for improved and easy moderation.",
   "version": "1.0.0",
   "author": {
     "name": "Key! Co! Organization"
