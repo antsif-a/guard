@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
-import { token } from './constants';
+import { token, presence } from './constants';
 
-const client: Client = new Client();
+const client: Client = new Client({ presence });
 
 void client.login(token);
