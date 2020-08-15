@@ -288,10 +288,10 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-discord-ts-kit@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/discord-ts-kit/-/discord-ts-kit-1.0.0.tgz#ec6722b7ea86b55ee8854fa414dfbfc3c936244e"
-  integrity sha512-MZ8Op8QoEXthjeAqAzUtubMN3t36/mCJ6z3WHFlMSuWsMkxFqK4o7u+DwsUrAL9R9e5QkWykAlOai+umXTI+aw==
+discord-ts-kit@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/discord-ts-kit/-/discord-ts-kit-1.0.1.tgz#a321c6268b23d2a9928371d4f1ecabbafb721ba8"
+  integrity sha512-+iTKs6aU68HBz5oFvDlNOHPolsY/C9/Vd/6Si3b0AMH1S3GqKRS8n/pXFU0fBvOHd24E15zUw206SlzXg71FPw==
   dependencies:
     discord.js "^12.2.0"
 
