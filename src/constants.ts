@@ -4,6 +4,8 @@ import { PresenceData } from 'discord.js';
 config();
 
 export const token = process.env.TOKEN;
+export const dev = process.env.DEVMODE;
+
 export const prefix = '$';
 
 export const presence: PresenceData = {
