@@ -3,7 +3,9 @@
   "description": "Guard is a Discord bot built for improved and easy moderation.",
   "version": "1.0.0",
   "author": {
-    "name": "Discord Guard creators"
+    "name": "Discord Guard creators",
+    "url": "https://github.com/DiscordGuard",
+    "email": "developers.guard@gmail.com"
   },
   "license": "GPL-3.0-or-later",
   "main": "dist/index.js",
@@ -28,10 +30,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DiscordGuard/guard.git"
+    "url": "https://github.com/DiscordGuard/Guard.git"
   },
   "bugs": {
     "url": "http://github.com/DiscordGuard/Guard/issues",
-    "email": "summet.dev@gmail.com"
+    "email": "developers.guard@gmail.com"
   }
 }
