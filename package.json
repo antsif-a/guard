@@ -1,9 +1,9 @@
 {
-  "name": "guard-bot",
+  "name": "guard",
   "description": "Guard is a Discord bot built for improved and easy moderation.",
   "version": "1.0.0",
   "author": {
-    "name": "Key! Co! Organization"
+    "name": "Discord Guard creators"
   },
   "license": "GPL-3.0-or-later",
   "main": "dist/index.js",
@@ -28,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/key-co/guard.git"
+    "url": "https://github.com/DiscordGuard/guard.git"
   },
   "bugs": {
-    "url": "http://github.com/key-co/Guard/issues",
-    "email": ""
+    "url": "http://github.com/DiscordGuard/Guard/issues",
+    "email": "summet.dev@gmail.com"
   }
 }
