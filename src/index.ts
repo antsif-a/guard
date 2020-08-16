@@ -6,6 +6,6 @@ import * as path from 'path';
 const client: Client = new Client({ presence });
 const events: EventsHandler = new EventsHandler(client);
 
-events.loadDir(path.join(__dirname, 'events'));
+events.load(path.join(__dirname, 'events'));
 
 void client.login(token);
