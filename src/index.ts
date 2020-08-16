@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { EventsHandler } from 'discord-ts-kit';
+import { EventsHandler } from './core';
 import { token, presence } from './constants';
 import * as path from 'path';
 

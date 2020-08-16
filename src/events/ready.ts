@@ -1,5 +1,5 @@
-import { Event, Colors, Formats } from 'discord-ts-kit';
-import { dev } from '../constants';
+import { Colors, Formats, dev } from '../constants';
+import { Event } from '../core';
 
 export default new Event('ready', (client) => {
     const { username, discriminator } = client.user;
