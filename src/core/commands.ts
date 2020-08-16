@@ -90,7 +90,7 @@ export class CommandsHandler {
      * Load directory with commands.
      * @param dirPath - An absolute path to directory with commands files.
      */
-    public loadDir(dirPath: string): CommandsHandler {
+    public load(dirPath: string): CommandsHandler {
         fs.readdirSync(dirPath).forEach((file) => {
             void import(path.resolve(dirPath, file)).then((module: CommandModule) => {
                 this.add(module.default);

@@ -52,7 +52,7 @@ export class EventsHandler {
      * Load events from directory.
      * @param dirPath - An absolute path to directory with events files.
      */
-    public loadDir(dirPath: string): void {
+    public load(dirPath: string): void {
         fs.readdirSync(dirPath).forEach((file) => {
             void import(path.resolve(dirPath, file)).then((module: EventModule) => {
                 this.add(module.default);
