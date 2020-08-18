@@ -14,6 +14,6 @@ export default new Event('ready', (client) => {
 
         `\n${Colors.green}--------------------------------------------------------------------------\n` +
         'If you need any help, you can talk to us through discord at - https://discord.gg/TugrCuy.\n' +
-        'You can also email us at developers.guard@gmail..com.\n' +
+        'You can also email us at developers.guard@gmail.com.\n' +
         `--------------------------------------------------------------------------${Formats.reset}\n`));
 });
