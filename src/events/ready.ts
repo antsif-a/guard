@@ -1,5 +1,5 @@
-import { Event, Colors, Formats } from 'discord-ts-kit';
-import { dev } from '../constants';
+import { Colors, Formats, dev } from '../constants';
+import { Event } from '../core';
 
 export default new Event('ready', (client) => {
     const { username, discriminator } = client.user;
@@ -13,7 +13,7 @@ export default new Event('ready', (client) => {
         (dev == 'true' ? '' : 
 
         `\n${Colors.green}--------------------------------------------------------------------------\n` +
-        'If you need any help, you can talk to me through discord at - Summet#4530.\n' +
-        'You can also email me at summet.dev@gmail.com.\n' +
+        'If you need any help, you can talk to us through discord at - https://discord.gg/TugrCuy.\n' +
+        'You can also email us at developers.guard@gmail.com.\n' +
         `--------------------------------------------------------------------------${Formats.reset}\n`));
 });

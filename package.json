@@ -17,7 +17,6 @@
     "start": "yarn dist && yarn bot"
   },
   "dependencies": {
-    "discord-ts-kit": "^1.0.2",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0"
   },
