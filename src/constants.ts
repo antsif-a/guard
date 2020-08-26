@@ -3,6 +3,8 @@ import { PresenceData } from 'discord.js';
 
 config();
 
+//#region Environment variables
+
 /**
  * Bot token.
  * @constant
@@ -14,6 +16,10 @@ export const token = process.env._TOKEN;
  * @constant
  */
 export const dev = process.env._DEV;
+
+//#endregion
+
+//#region Bot
 
 /**
  * Bot's default prefix.
@@ -31,6 +37,10 @@ export const presence: PresenceData = {
         name: `Prefix: ${prefix}`
     }
 };
+
+//#endregion
+
+//#region Utils
 
 /**
  * All terminal colors. 
@@ -59,3 +69,5 @@ export class Formats {
     public static reverse = "\x1b[7m";
     public static hidden = "\x1b[8m";
 }
+
+//#endregion
