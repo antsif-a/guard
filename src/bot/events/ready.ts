@@ -1,5 +1,5 @@
-import { Colors, Formats, dev } from '../constants';
-import { Event } from '../core';
+import { Colors, Formats, dev } from '../../constants';
+import { Event } from '../../core';
 
 export default new Event('ready', (client) => {
     const { username, discriminator } = client.user;

@@ -32,13 +32,13 @@ export const prefix = '$';
  * @file Path to events folder.
  * @constant
  */
-export const eventsPath = path.join(__dirname, 'events');
+export const eventsPath = path.join(__dirname, 'bot', 'events');
 
 /**
  * @file Path to events folder.
  * @constant
  */
-export const commandsPath = path.join(__dirname, 'commands');
+export const commandsPath = path.join(__dirname, 'bot', 'commands');
 
 /**
  * Rich presence of bot.
