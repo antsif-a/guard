@@ -8,10 +8,10 @@ import * as fs from 'fs';
 export class Command {
 
     /** Command name. */
-    public readonly name: string;
+    readonly name: string;
 
     /** Command listener. */
-    public listener: (message: Message, ...args: string[]) => void;
+    readonly listener: (message: Message, ...args: string[]) => void;
 
     /**
      * Command constructor.
@@ -26,10 +26,9 @@ export class Command {
     /**
      * Run command.
      * @param message - A message that called this command.
-     * @param client - Current bot.
      * @param args - Command args.
      */
-    public run(message: Message, ...args: string[]): void {
+    run(message: Message, ...args: string[]): void {
         return this.listener(message, ...args);
     }
 }
@@ -73,7 +72,7 @@ export class CommandsHandler {
      * Add new command.
      * @param command - Command to be added.
      */
-    public add(command: Command): CommandsHandler {
+    add(command: Command): CommandsHandler {
         this.commands.push(command);
         return this;
     }
@@ -81,7 +80,7 @@ export class CommandsHandler {
     /**
      * Clear bot commands.
      */
-    public clear(): CommandsHandler {
+    clear(): CommandsHandler {
         this.commands = [];
         return this;
     }
@@ -90,7 +89,7 @@ export class CommandsHandler {
      * Load directory with commands.
      * @param dirPath - An absolute path to directory with commands files.
      */
-    public load(dirPath: string): CommandsHandler {
+    load(dirPath: string): CommandsHandler {
         fs.readdirSync(dirPath).forEach((file) => {
             void import(path.resolve(dirPath, file)).then((module: CommandModule) => {
                 this.add(module.default);
@@ -104,7 +103,7 @@ export class CommandsHandler {
      * Find existing command.
      * @param name - Command name.
      */
-    public find(name: string): Command {
+    find(name: string): Command {
         if (!name) return null;
         return this.commands.find((command) => command.name == name);
     }
@@ -112,7 +111,7 @@ export class CommandsHandler {
     /**
      * Get all commands.
      */
-    public all(): Command[] {
+    all(): Command[] {
         return this.commands;
     }
 }

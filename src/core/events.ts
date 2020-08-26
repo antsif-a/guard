@@ -8,10 +8,10 @@ import * as path from 'path';
 export class Event<K extends keyof ClientEvents> {
 
     /** Event name. */
-    public readonly name: K;
+    readonly name: K;
 
     /** Event listener. */
-    public readonly listener: (client: Client, ...args: ClientEvents[K]) => void;
+    readonly listener: (client: Client, ...args: ClientEvents[K]) => void;
 
     /**
      * Event constructor.
@@ -44,7 +44,7 @@ export class EventsHandler {
      * Add new event.
      * @param event - Event to be added.
      */
-    public add<K extends keyof ClientEvents>(event: Event<K>): void {
+    add<K extends keyof ClientEvents>(event: Event<K>): void {
         this.client.on(event.name, (...args) => event.listener(this.client, ...args));
     }
 
@@ -52,7 +52,7 @@ export class EventsHandler {
      * Load events from directory.
      * @param dirPath - An absolute path to directory with events files.
      */
-    public load(dirPath: string): void {
+    load(dirPath: string): void {
         fs.readdirSync(dirPath).forEach((file) => {
             void import(path.resolve(dirPath, file)).then((module: EventModule) => {
                 this.add(module.default);
