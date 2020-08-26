@@ -1,11 +1,13 @@
 import { Client } from 'discord.js';
-import { EventsHandler } from './core';
-import { token, presence } from './constants';
-import * as path from 'path';
+import { CommandsHandler, EventsHandler } from './core';
+import { token, eventsPath, commandsPath, presence, prefix } from './constants';
 
 const client: Client = new Client({ presence });
-const events: EventsHandler = new EventsHandler(client);
 
-events.load(path.join(__dirname, 'events'));
+const events: EventsHandler = new EventsHandler(client);
+events.load(eventsPath);
+
+const commands: CommandsHandler = new CommandsHandler(client, prefix);
+commands.load(commandsPath);
 
 void client.login(token);

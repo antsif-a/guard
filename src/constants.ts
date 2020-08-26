@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import { PresenceData } from 'discord.js';
+import * as path from 'path';
 
 config();
 
@@ -26,6 +27,18 @@ export const dev = process.env._DEV;
  * @constant
  */
 export const prefix = '$';
+
+/**
+ * @file Path to events folder.
+ * @constant
+ */
+export const eventsPath = path.join(__dirname, 'events');
+
+/**
+ * @file Path to events folder.
+ * @constant
+ */
+export const commandsPath = path.join(__dirname, 'commands');
 
 /**
  * Rich presence of bot.
