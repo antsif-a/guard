@@ -14,7 +14,8 @@
     "lint": "eslint src",
     "dist": "tsc",
     "bot": "node .",
-    "start": "yarn dist && yarn bot"
+    "start": "yarn dist && yarn bot",
+    "test": "tsc"
   },
   "dependencies": {
     "discord.js": "^12.2.0",
