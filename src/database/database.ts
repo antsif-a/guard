@@ -6,19 +6,27 @@ export class Database {
         return new Connection(databasePath);
     }
 
-    runSql(sql: string, params: string[] = []): void {
+    run(sql: string, params: string[] = []): void {
         const con = this.connect();
         con.serialize(() => con.run(sql, params));
+        con.close();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    all(sql: string, params: string[] = [], callback: (err: Error | null, rows: any[]) => void) {
+        const con = this.connect();
+        con.serialize(() => con.all(sql, params, callback));
+        con.close();
     }
 
     createDefaults(): void {
-        this.runSql(`CREATE TABLE IF NOT EXISTS Users (
+        this.run(`CREATE TABLE IF NOT EXISTS Users (
                id VARCHAR(18),
                guild VARCHAR(18),
                warnings INT
         )`);
 
-        this.runSql(`CREATE TABLE IF NOT EXISTS Guilds (
+        this.run(`CREATE TABLE IF NOT EXISTS Guilds (
                id VARCHAR(18),
                prefix VARCHAR(1) 
         )`);

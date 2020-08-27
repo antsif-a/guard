@@ -41,8 +41,12 @@ export class CommandsHandler {
     /** Client for commands. */
     private readonly client: Client;
 
-    /** Command prefix. */
-    private readonly prefix: string;
+    /** Default command prefix. */
+    private readonly defaultPrefix: string;
+
+    /** Select a prefix depend on message */
+    // eslint-disable-next-line @typescript-eslint/require-await
+    getPrefix: PrefixListener = async () => this.defaultPrefix;
 
     /** Array of all commands. */
     private commands: Command[];
@@ -50,17 +54,21 @@ export class CommandsHandler {
     /**
      * Commands handler constructor.
      * @param client - Client for commands.
-     * @param prefix - Command prefix.
+     * @param defaultPrefix - Command prefix.
      */
-    constructor(client: Client, prefix: string) {
+    constructor(client: Client, defaultPrefix: string) {
         this.client = client;
-        this.prefix = prefix;
+        this.defaultPrefix = defaultPrefix;
         this.commands = [];
+        defaultPrefix.length
 
-        this.client.on('message', (message: Message): void => {
-            if (message.author.bot || !message.content.startsWith(this.prefix)) return;
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        this.client.on('message', async (message: Message) => {
+            const prefix = await this.getPrefix(message) || defaultPrefix;
 
-            const args: string[] = message.content.slice(this.prefix.length).trim().split(/ +/);
+            if (message.author.bot || !message.content.startsWith(prefix)) return;
+
+            const args: string[] = message.content.slice(prefix.length).trim().split(/ +/);
             const commandName: string = args.shift().toLowerCase();
 
             const command = this.find(commandName);
@@ -100,6 +108,15 @@ export class CommandsHandler {
     }
 
     /**
+     * Set prefix listener.
+     * @param listener - A function that returns prefix depend on message.
+     */
+    setPrefix(listener: PrefixListener): CommandsHandler {
+        this.getPrefix = listener;
+        return this;
+    }
+
+    /**
      * Find existing command.
      * @param name - Command name.
      */
@@ -115,6 +132,8 @@ export class CommandsHandler {
         return this.commands;
     }
 }
+
+type PrefixListener = (message: Message) => Promise<string>;
 
 type CommandListener = (message: Message, ...args: string[]) => void;
 

@@ -27,7 +27,7 @@ export const dev = process.env.GUARD_DEV;
  * Bot's default prefix.
  * @constant
  */
-export const prefix = '.';
+export const defaultPrefix = '$';
 
 /**
  * Path to events folder.
@@ -54,7 +54,7 @@ export const databasePath = path.join(__dirname, '..', 'database', 'default.db')
 export const presence: PresenceData = {
     activity: {
         type: 'PLAYING',
-        name: `Prefix: ${prefix}`
+        name: `Prefix: ${defaultPrefix}`
     }
 };
 
