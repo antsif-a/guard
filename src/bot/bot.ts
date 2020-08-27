@@ -3,7 +3,7 @@ import { Client } from 'discord.js';
 import { token, prefix, commandsPath, eventsPath } from '../constants';
 
 export class GuardBot {
-    static bot: GuardBot;
+    static instance: GuardBot;
 
     client: Client;
     commands: CommandsHandler;
@@ -11,9 +11,9 @@ export class GuardBot {
 
     constructor() {
         // Do not allow to create second instance
-        if (GuardBot.bot) return GuardBot.bot;
+        if (GuardBot.instance) return GuardBot.instance;
 
-        GuardBot.bot = this;
+        GuardBot.instance = this;
         this.init();
         this.load();
         this.start();
@@ -27,6 +27,10 @@ export class GuardBot {
 
     private load(): void {
         this.commands.load(commandsPath);
+        // Ready message test
+        // this.commands.add(new Command('warn', () => {}));
+        // this.commands.add(new Command('unwarn', () => {}));
+        // this.commands.add(new Command('prefix', () => {}));
         this.events.load(eventsPath);
     }
 

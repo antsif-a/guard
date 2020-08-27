@@ -117,8 +117,8 @@ export class CommandsHandler {
 }
 
 /**
- * Helper type.
+ * Example of command module.
  */
-type CommandModule = {
+interface CommandModule {
     default: Command
-};
+}

@@ -62,8 +62,8 @@ export class EventsHandler {
 }
 
 /**
- * Helper type.
+ * Example of event module.
  */
-type EventModule = {
+interface EventModule {
     default: Event<never>
-};
+}
