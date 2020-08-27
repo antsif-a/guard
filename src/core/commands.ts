@@ -11,14 +11,14 @@ export class Command {
     readonly name: string;
 
     /** Command listener. */
-    readonly listener: (message: Message, ...args: string[]) => void;
+    readonly listener: CommandListener;
 
     /**
      * Command constructor.
      * @param name - Command name.
      * @param listener  Command listener.
      */
-    constructor(name: string, listener: (message: Message, ...args: string[]) => void) {
+    constructor(name: string, listener: CommandListener) {
         this.name = name;
         this.listener = listener;
     }
@@ -115,6 +115,8 @@ export class CommandsHandler {
         return this.commands;
     }
 }
+
+type CommandListener = (message: Message, ...args: string[]) => void;
 
 /**
  * Example of command module.

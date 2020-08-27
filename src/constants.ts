@@ -27,7 +27,7 @@ export const dev = process.env.GUARD_DEV;
  * Bot's default prefix.
  * @constant
  */
-export const prefix = '$';
+export const prefix = '.';
 
 /**
  * Path to events folder.
@@ -36,10 +36,16 @@ export const prefix = '$';
 export const eventsPath = path.join(__dirname, 'bot', 'events');
 
 /**
- * Path to events folder.
+ * Path to commands folder.
  * @constant
  */
 export const commandsPath = path.join(__dirname, 'bot', 'commands');
+
+/**
+ * Path to database file.
+ * @constant
+ */
+export const databasePath = path.join(__dirname, '..', 'database', 'default.db');
 
 /**
  * Rich presence of bot.

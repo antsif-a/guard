@@ -11,14 +11,14 @@ export class Event<K extends keyof ClientEvents> {
     readonly name: K;
 
     /** Event listener. */
-    readonly listener: (client: Client, ...args: ClientEvents[K]) => void;
+    readonly listener: EventListener;
 
     /**
      * Event constructor.
      * @param name - Event name.
      * @param listener - Event listener.
      */
-    constructor(name: K, listener: (client: Client, ...args: ClientEvents[K]) => void) {
+    constructor(name: K, listener: EventListener) {
         this.name = name;
         this.listener = listener;
     }
@@ -60,6 +60,8 @@ export class EventsHandler {
         });
     }
 }
+
+type EventListener = <K extends keyof ClientEvents>(client: Client, ...args: ClientEvents[K]) => void;
 
 /**
  * Example of event module.

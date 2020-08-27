@@ -1,11 +1,13 @@
 import { CommandsHandler, EventsHandler } from '../core';
 import { Client } from 'discord.js';
+import { Database } from '../database';
 import { token, prefix, commandsPath, eventsPath } from '../constants';
 
 export class GuardBot {
     static instance: GuardBot;
 
     client: Client;
+    database: Database;
     commands: CommandsHandler;
     events: EventsHandler;
 
@@ -21,16 +23,14 @@ export class GuardBot {
 
     private init(): void {
         this.client = new Client();
+        this.database = new Database();
         this.commands = new CommandsHandler(this.client, prefix);
         this.events = new EventsHandler(this.client);
     }
 
     private load(): void {
+        this.database.createDefaults();
         this.commands.load(commandsPath);
-        // Ready message test
-        // this.commands.add(new Command('warn', () => {}));
-        // this.commands.add(new Command('unwarn', () => {}));
-        // this.commands.add(new Command('prefix', () => {}));
         this.events.load(eventsPath);
     }
 
