@@ -10,14 +10,14 @@ config();
  * Bot token.
  * @constant
  */
-export const token = process.env._TOKEN;
+export const token = process.env.GUARD_TOKEN;
 
 /**
- * Whether dev mode is enabled or not.
+ * Whether dev mode is enabled.
  * Not in use right now.
  * @constant
  */
-export const dev = process.env._DEV;
+export const dev = process.env.GUARD_DEV;
 
 //#endregion
 
