@@ -1,7 +1,7 @@
 import { Command } from '../../core';
 import { GuardBot } from '../bot';
 
-export default new Command('prefix', (message, prefix) => {
+const command = new Command('prefix', (message, prefix) => {
     const { channel } = message;
 
     if (!prefix) {
@@ -31,3 +31,7 @@ export default new Command('prefix', (message, prefix) => {
         void channel.send(`Prefix set to "${prefix}"!`);
     });
 });
+
+command.permissions.push('MANAGE_MESSAGES');
+
+export default command;
