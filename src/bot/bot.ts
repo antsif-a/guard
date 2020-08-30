@@ -32,6 +32,9 @@ export class GuardBot {
         this.database.createDefaults();
         this.commands.load(commandsPath);
         this.commands.setPrefix(async (message) => this.getPrefix(message));
+        this.commands.setPermissionsAlert((message, command) => {
+            return `You can't use ${message.content[0]}${command.name} command!`;
+        })
         this.events.load(eventsPath);
     }
 

@@ -1,4 +1,4 @@
-import { Client, Message } from 'discord.js';
+import { Client, GuildMember, Message, PermissionString } from 'discord.js';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -13,6 +13,9 @@ export class Command {
     /** Command listener. */
     readonly listener: CommandListener;
 
+    /** Permissions required for command call. */
+    permissions: PermissionString[];
+
     /**
      * Command constructor.
      * @param name - Command name.
@@ -21,6 +24,17 @@ export class Command {
     constructor(name: string, listener: CommandListener) {
         this.name = name;
         this.listener = listener;
+        this.permissions = [];
+    }
+
+    checkPermissions(member: GuildMember): boolean {
+        for (const p of this.permissions) {
+            if (!member.hasPermission(p)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -44,9 +58,12 @@ export class CommandsHandler {
     /** Default command prefix. */
     private readonly defaultPrefix: string;
 
+    /** Missing permissions message. */
+    private getPermissionAlert: PermissionDeniedAlert;
+
     /** Select a prefix depend on message */
     // eslint-disable-next-line @typescript-eslint/require-await
-    getPrefix: PrefixListener = async () => this.defaultPrefix;
+    private getPrefix: PrefixListener = async () => this.defaultPrefix;
 
     /** Array of all commands. */
     private commands: Command[];
@@ -72,7 +89,14 @@ export class CommandsHandler {
             const commandName: string = args.shift().toLowerCase();
 
             const command = this.find(commandName);
-            if (command) command.run(message, ...args);
+            if (command) {
+                if (!command.checkPermissions(message.member)) {
+                    return this.getPermissionAlert
+                        ? void await message.channel.send(this.getPermissionAlert(message, command))
+                        : undefined;
+                }
+                command.run(message, ...args);
+            }
         });
     }
 
@@ -117,6 +141,15 @@ export class CommandsHandler {
     }
 
     /**
+     * Set denied permissions alert listener
+     * @param listener - A function that returns message depend on message and command.
+     */
+    setPermissionsAlert(listener: PermissionDeniedAlert): CommandsHandler {
+        this.getPermissionAlert = listener;
+        return this;
+    }
+
+    /**
      * Find existing command.
      * @param name - Command name.
      */
@@ -134,6 +167,8 @@ export class CommandsHandler {
 }
 
 type PrefixListener = (message: Message) => Promise<string>;
+
+type PermissionDeniedAlert = (message: Message, command: Command) => string;
 
 type CommandListener = (message: Message, ...args: string[]) => void;
 
