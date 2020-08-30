@@ -13,7 +13,7 @@ export class Database {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    all(sql: string, params: string[] = [], callback: (err: Error | null, rows: any[]) => void) {
+    all(sql: string, params: string[] = [], callback: (err: Error | null, rows: any[]) => void): void {
         const con = this.connect();
         con.serialize(() => con.all(sql, params, callback));
         con.close();

@@ -54,7 +54,7 @@ export const databasePath = path.join(__dirname, '..', 'database', 'default.db')
 export const presence: PresenceData = {
     activity: {
         type: 'PLAYING',
-        name: `Prefix: ${defaultPrefix}`
+        name: 'with moderators'
     }
 };
 
