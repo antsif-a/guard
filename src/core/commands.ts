@@ -140,6 +140,10 @@ export class CommandsHandler {
         return this;
     }
 
+    /**
+     * Set denied permissions alert listener
+     * @param listener - A function that returns message depend on message and command.
+     */
     setPermissionsAlert(listener: PermissionDeniedAlert): CommandsHandler {
         this.getPermissionAlert = listener;
         return this;
