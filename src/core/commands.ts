@@ -60,7 +60,6 @@ export class CommandsHandler {
         this.client = client;
         this.defaultPrefix = defaultPrefix;
         this.commands = [];
-        defaultPrefix.length
 
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         this.client.on('message', async (message: Message) => {
