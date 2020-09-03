@@ -13,12 +13,12 @@ const command = new Command('prefix', (message, prefix) => {
     const { id } = message.guild;
     const db = GuardBot.database;
 
-    db.all(`SELECT * FROM Guilds WHERE id = ${message.guild.id};`, [], (err, rows) => {
+    db.all(`SELECT * FROM Guilds WHERE id = ?;`, [message.guild.id], (err, rows) => {
         if (err) return console.error(err);
         if (!rows.length) {
             db.run(`
                 INSERT INTO Guilds (id, prefix)
-                VALUES(?, ?);
+                VALUES (?, ?);
             `, [id, prefix]);
         } else {
             db.run(`

@@ -28,7 +28,7 @@ export class Database {
 
         this.run(`CREATE TABLE IF NOT EXISTS Guilds (
                id VARCHAR(18),
-               prefix VARCHAR(1) 
+               prefix VARCHAR(1)
         )`);
     }
 }
