@@ -22,4 +22,6 @@ const command = new Command('warnings', (message, username) => {
     });
 });
 
+command.permissions.push("MANAGE_MESSAGES");
+
 export default command;
