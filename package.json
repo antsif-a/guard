@@ -15,7 +15,8 @@
         "build:tsc": "tsc",
         "run:dev": "yarn env ts-node ./src/index.ts",
         "env": "cross-env NODE_PATH=./src",
-        "eslint": "eslint ."
+        "eslint": "eslint .",
+        "test": "tsc"
     },
     "dependencies": {
         "discord.js": "^12.2.0",
