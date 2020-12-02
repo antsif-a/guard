@@ -1,6 +1,6 @@
 import { Colors, Formats } from '../../constants';
-import { Event } from '../../core';
-import { GuardBot } from '..';
+import { Event } from 'core/events';
+import { GuardBot } from 'bot/bot';
 
 export default new Event('ready', (client) => {
     const { username, discriminator } = client.user;

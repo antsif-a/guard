@@ -45,7 +45,7 @@ export const commandsPath = path.join(__dirname, 'bot', 'commands');
  * Path to database file.
  * @constant
  */
-export const databasePath = path.join(__dirname, '..', 'database', 'default.db');
+export const databasePath = path.join(__dirname, '..', 'default.db');
 
 /**
  * Rich presence of bot.

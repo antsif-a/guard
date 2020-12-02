@@ -1,5 +1,5 @@
-import { Command } from '../../core';
-import { GuardBot } from '../bot';
+import { Command } from 'core/commands';
+import { GuardBot } from 'bot/bot';
 
 const command = new Command('prefix', (message, prefix) => {
     const { channel } = message;

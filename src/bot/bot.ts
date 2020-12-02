@@ -1,7 +1,8 @@
-import { CommandsHandler, EventsHandler } from '../core';
 import { Client, Message } from 'discord.js';
-import { Database } from '../database';
 import { token, defaultPrefix, commandsPath, eventsPath, presence } from '../constants';
+import { CommandsHandler } from 'core/commands';
+import { EventsHandler } from 'core/events';
+import { Database } from 'database/database';
 
 export class GuardBot {
     static instance: GuardBot;

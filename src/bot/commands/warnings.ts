@@ -1,6 +1,6 @@
-import { Command } from '../../core';
-import { GuardBot } from '../bot';
-import { Queries } from '../../database/queries';
+import { Command } from 'core/commands';
+import { GuardBot } from 'bot/bot';
+import { Queries } from 'database/queries';
 
 const command = new Command('warnings', (message, username) => {
     const { channel } = message;

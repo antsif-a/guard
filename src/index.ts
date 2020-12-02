@@ -1,2 +1,2 @@
-import { GuardBot } from './bot';
+import { GuardBot } from 'bot/bot';
 new GuardBot();
