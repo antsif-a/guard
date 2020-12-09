@@ -1,5 +1,6 @@
 import { Command } from 'core/commands';
 import { GuardBot } from 'bot/bot';
+import { Sql } from '../../database/queries';
 
 const command = new Command('prefix', (message, prefix) => {
     const { channel } = message;
@@ -13,7 +14,7 @@ const command = new Command('prefix', (message, prefix) => {
     const { id } = message.guild;
     const db = GuardBot.database;
 
-    db.all(`SELECT * FROM Guilds WHERE id = ?;`, [message.guild.id], (err, rows) => {
+    db.all(Sql.get('prefix'), [message.guild.id], (err, rows) => {
         if (err) return console.error(err);
         if (!rows.length) {
             db.run(`
