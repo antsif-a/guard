@@ -1,8 +1,9 @@
 import { Client, Message } from 'discord.js';
-import { token, defaultPrefix, commandsPath, eventsPath, presence } from '../constants';
+import { token, defaultPrefix, commandsPath, eventsPath, presence } from 'bot/constants';
 import { CommandsHandler } from 'core/commands';
 import { EventsHandler } from 'core/events';
 import { Database } from 'database/database';
+import { Sql } from 'database/queries';
 
 export class GuardBot {
     static instance: GuardBot;
@@ -17,6 +18,7 @@ export class GuardBot {
         if (GuardBot.instance) return GuardBot.instance;
 
         GuardBot.instance = this;
+        Sql.init();
         this.init();
         this.load();
         this.start();
@@ -30,6 +32,8 @@ export class GuardBot {
     }
 
     private load(): void {
+        Sql.load();
+
         this.database.createDefaults();
         this.commands.load(commandsPath);
         this.commands.setPrefix(async (message) => this.getPrefix(message));

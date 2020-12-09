@@ -1,5 +1,6 @@
 import { Database as Connection } from 'sqlite3';
-import { databasePath } from '../constants';
+import { databasePath } from '../bot/constants';
+import { Sql } from 'database/queries';
 
 export class Database {
     connect(): Connection {
@@ -20,15 +21,6 @@ export class Database {
     }
 
     createDefaults(): void {
-        this.run(`CREATE TABLE IF NOT EXISTS Users (
-               id VARCHAR(18),
-               guild VARCHAR(18),
-               warnings INT
-        )`);
-
-        this.run(`CREATE TABLE IF NOT EXISTS Guilds (
-               id VARCHAR(18),
-               prefix VARCHAR(1)
-        )`);
+        this.run(Sql.get('defaults'));
     }
 }

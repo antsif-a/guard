@@ -19,7 +19,7 @@ export class Command {
     /**
      * Command constructor.
      * @param name - Command name.
-     * @param listener  Command listener.
+     * @param listener - Command listener.
      */
     constructor(name: string, listener: CommandListener) {
         this.name = name;

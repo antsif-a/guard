@@ -33,19 +33,25 @@ export const defaultPrefix = '$';
  * Path to events folder.
  * @constant
  */
-export const eventsPath = path.join(__dirname, 'bot', 'events');
+export const eventsPath = path.join(__dirname, 'events');
 
 /**
  * Path to commands folder.
  * @constant
  */
-export const commandsPath = path.join(__dirname, 'bot', 'commands');
+export const commandsPath = path.join(__dirname, 'commands');
 
 /**
  * Path to database file.
  * @constant
  */
-export const databasePath = path.join(__dirname, '..', 'default.db');
+export const databasePath = path.join(__dirname, '..', '..', 'default.db');
+
+/**
+ * Path to sql queries folder.
+ * @constant
+ */
+export const sqlPath = path.join(__dirname, '..', 'database', 'sql');
 
 /**
  * Rich presence of bot.

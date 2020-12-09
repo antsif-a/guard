@@ -1,6 +1,6 @@
 import { Command } from 'core/commands';
 import { GuardBot } from 'bot/bot';
-import { Queries } from 'database/queries';
+import { Sql } from 'database/queries';
 
 const command = new Command('warn', (message, username) => {
     const { channel } = message;
@@ -13,7 +13,7 @@ const command = new Command('warn', (message, username) => {
     const id = member.id;
     const guildId = member.guild.id;
 
-    db.all(Queries.getWarnings, [id, guildId], (err, rows) => {
+    db.all(Sql.get('warnings'), [id, guildId], (err, rows) => {
         if (err) return console.error(err);
         if (!rows.length) {
             db.run(`

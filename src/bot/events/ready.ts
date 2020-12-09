@@ -1,4 +1,4 @@
-import { Colors, Formats } from '../../constants';
+import { Colors, Formats } from '../constants';
 import { Event } from 'core/events';
 import { GuardBot } from 'bot/bot';
 

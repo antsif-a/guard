@@ -1,6 +1,6 @@
 import { Command } from 'core/commands';
 import { GuardBot } from 'bot/bot';
-import { Queries } from 'database/queries';
+import { Sql } from 'database/queries';
 
 const command = new Command('warnings', (message, username) => {
     const { channel } = message;
@@ -8,7 +8,7 @@ const command = new Command('warnings', (message, username) => {
 
     if (!username || !member) return void channel.send('No user provided!');
 
-    GuardBot.database.all(Queries.getWarnings, [member.id, member.guild.id], (err, rows) => {
+    GuardBot.database.all(Sql.get('warnings'), [member.id, member.guild.id], (err, rows) => {
         if (err) console.error(err);
         if (!rows.length) {
             void channel.send(`User '${member.user.username}' has 0 warnings.`);
