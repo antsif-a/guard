@@ -6,3 +6,14 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+    id       String @id
+    warnings Int @default(0)
+}
+
+model Guild {
+    id     String    @id
+    prefix String @default("$")
+    users  User[]
+}

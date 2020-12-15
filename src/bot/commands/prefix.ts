@@ -1,36 +1,31 @@
 import { Command } from 'core/commands';
-import { GuardBot } from 'bot/bot';
-import { Sql } from '../../database/queries';
+import { prisma } from 'core/prisma';
 
-const command = new Command('prefix', (message, prefix) => {
-    const { channel } = message;
+const command = new Command('prefix', async (message, newPrefix) => {
+    const { prefix } = await prisma.guild.findFirst({
+        where: {
+            id: message.guild.id
+        },
+        select: {
+            prefix: true
+        }
+    });
 
-    if (!prefix) {
-        return void GuardBot.instance.getPrefix(message).then(p => {
-            void channel.send(`Invalid arguments! Usage: \`${p}prefix <prefix>\``);
-        });
+    if (!newPrefix) {
+        await message.channel.send(`Invalid arguments! Usage: \`${prefix}prefix <prefix>\``);
+        return;
     }
 
-    const { id } = message.guild;
-    const db = GuardBot.database;
-
-    db.all(Sql.get('prefix'), [message.guild.id], (err, rows) => {
-        if (err) return console.error(err);
-        if (!rows.length) {
-            db.run(`
-                INSERT INTO Guilds (id, prefix)
-                VALUES (?, ?);
-            `, [id, prefix]);
-        } else {
-            db.run(`
-                UPDATE Guilds
-                SET prefix = ?
-                WHERE id = ?;
-            `, [prefix, id]);
+    await prisma.guild.update({
+        where: {
+            id: message.guild.id
+        },
+        data: {
+            prefix: newPrefix
         }
-
-        void channel.send(`Prefix set to "${prefix}"!`);
     });
+
+    await message.channel.send(`Prefix set to "${newPrefix}"!`);
 });
 
 command.permissions.push('MANAGE_MESSAGES');
