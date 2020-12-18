@@ -18,8 +18,7 @@
         "eslint": "eslint .",
         "test": "tsc",
         "prisma": "prisma",
-        "prisma:migrate": "prisma migrate",
-        "prisma:generate": "prisma generate"
+        "prisma:migrate": "prisma migrate --preview-feature"
     },
     "dependencies": {
         "@prisma/client": "^2.13.0",

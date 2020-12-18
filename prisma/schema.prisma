@@ -7,13 +7,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-    id       String @id
-    warnings Int @default(0)
+model Guild {
+    id     String @id
+    prefix String @default("$")
 }
 
-model Guild {
-    id     String    @id
-    prefix String @default("$")
-    users  User[]
+model Member {
+    id       String @id
+    guildId  String
+    warnings Int    @default(0)
+
+    @@unique([id, guildId])
 }
