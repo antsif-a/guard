@@ -15,15 +15,19 @@
         "build:tsc": "tsc",
         "run:dev": "yarn env ts-node ./src/index.ts",
         "env": "cross-env NODE_PATH=./src",
-        "eslint": "eslint .",
-        "test": "tsc"
+        "eslint": "eslint ./src",
+        "test": "tsc",
+        "prisma": "prisma",
+        "prisma:migrate": "prisma migrate --preview-feature"
     },
     "dependencies": {
+        "@prisma/client": "^2.13.0",
         "discord.js": "^12.2.0",
         "dotenv": "^8.2.0",
         "sqlite3": "^5.0.0"
     },
     "devDependencies": {
+        "@prisma/cli": "^2.13.0",
         "@types/node": "^14.0.27",
         "@types/sqlite3": "^3.1.6",
         "@typescript-eslint/eslint-plugin": "^3.9.0",

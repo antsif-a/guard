@@ -1,37 +1,46 @@
 import { Command } from 'core/commands';
-import { GuardBot } from 'bot/bot';
-import { Sql } from 'database/queries';
+import { prisma } from 'core/prisma';
 
-const command = new Command('warn', (message, username) => {
-    const { channel } = message;
-    const member = message.mentions.members.first();
+const command = new Command('warn', async (message) => {
+    const mentioned = message.mentions.members.first();
 
-    if (!username || !member) return void channel.send('No user provided!');
+    if (!mentioned) {
+        await message.channel.send('No user provided!');
+        return;
+    }
 
-    const db = GuardBot.database;
-
-    const id = member.id;
-    const guildId = member.guild.id;
-
-    db.all(Sql.get('warnings'), [id, guildId], (err, rows) => {
-        if (err) return console.error(err);
-        if (!rows.length) {
-            db.run(`
-                INSERT INTO Users (id, guild, warnings)
-                VALUES (?, ?, ${1});
-            `, [id, guildId]);
-            void channel.send(`User '${member.user.username}' has been warned 1 time.`);
-        } else {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            const warnings: number = rows[0].warnings;
-            db.run(`
-                UPDATE Users
-                SET warnings = ${warnings + 1}
-                WHERE id = ? AND guild = ?;
-            `, [id, guildId]);
-            void channel.send(`User '${member.user.username}' has been warned ${warnings + 1} times.`);
-        }
+    const member = await prisma.member.findUnique({
+        where: {
+            id_guildId: {
+                id: mentioned.id,
+                guildId: mentioned.guild.id,
+            },
+        },
+        select: {
+            warnings: true,
+        },
     });
+
+    const warnings = member ? member.warnings + 1 : 1;
+
+    await prisma.member.upsert({
+        where: {
+            id_guildId: {
+                id: mentioned.id,
+                guildId: mentioned.guild.id,
+            },
+        },
+        create: {
+            id: mentioned.id,
+            guildId: mentioned.guild.id,
+            warnings: 1,
+        },
+        update: {
+            warnings,
+        },
+    });
+
+    await message.channel.send(`User '${mentioned.user.username}' has been warned ${warnings} times.`);
 });
 
 command.permissions.push("MANAGE_MESSAGES");

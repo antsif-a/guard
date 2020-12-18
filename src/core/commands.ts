@@ -1,4 +1,5 @@
 import { Client, GuildMember, Message, PermissionString } from 'discord.js';
+import { prisma } from 'core/prisma';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -42,8 +43,8 @@ export class Command {
      * @param message - A message that called this command.
      * @param args - Command args.
      */
-    run(message: Message, ...args: string[]): void {
-        return this.listener(message, ...args);
+    async run(message: Message, ...args: string[]): Promise<void> {
+        await this.listener(message, ...args);
     }
 }
 
@@ -61,10 +62,6 @@ export class CommandsHandler {
     /** Missing permissions message. */
     private getPermissionAlert: PermissionDeniedAlert;
 
-    /** Select a prefix depend on message */
-    // eslint-disable-next-line @typescript-eslint/require-await
-    private getPrefix: PrefixListener = async () => this.defaultPrefix;
-
     /** Array of all commands. */
     private commands: Command[];
 
@@ -80,7 +77,24 @@ export class CommandsHandler {
 
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         this.client.on('message', async (message: Message) => {
-            const prefix = await this.getPrefix(message) || defaultPrefix;
+            let guild = await prisma.guild.findFirst({
+                where: {
+                    id: message.guild.id
+                },
+                select: {
+                    prefix: true
+                }
+            });
+
+            if (!guild) {
+                guild = await prisma.guild.create({
+                    data: {
+                        id: message.guild.id,
+                    },
+                });
+            }
+
+            const { prefix } = guild;
 
             if (message.author.bot || !message.content.startsWith(prefix)) return;
 
@@ -94,7 +108,7 @@ export class CommandsHandler {
                         ? void await message.channel.send(this.getPermissionAlert(message, command))
                         : undefined;
                 }
-                command.run(message, ...args);
+                await command.run(message, ...args);
             }
         });
     }
@@ -131,15 +145,6 @@ export class CommandsHandler {
     }
 
     /**
-     * Set prefix listener.
-     * @param listener - A function that returns prefix depend on message.
-     */
-    setPrefix(listener: PrefixListener): CommandsHandler {
-        this.getPrefix = listener;
-        return this;
-    }
-
-    /**
      * Set denied permissions alert listener
      * @param listener - A function that returns message depend on message and command.
      */
@@ -165,11 +170,9 @@ export class CommandsHandler {
     }
 }
 
-type PrefixListener = (message: Message) => Promise<string>;
-
 type PermissionDeniedAlert = (message: Message, command: Command) => string;
 
-type CommandListener = (message: Message, ...args: string[]) => void;
+type CommandListener = (message: Message, ...args: string[]) => Promise<void>;
 
 /**
  * Example of command module.

@@ -20,7 +20,7 @@
     "rules": {
         "no-console": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": ["off"],
         "no-plusplus": ["error", {
             "allowForLoopAfterthoughts": true
         }]
