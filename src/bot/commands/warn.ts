@@ -11,7 +11,10 @@ const command = new Command('warn', async (message) => {
 
     const member = await prisma.member.findUnique({
         where: {
-            id: mentioned.id,
+            id_guildId: {
+                id: mentioned.id,
+                guildId: mentioned.guild.id
+            }
         },
         select: {
             warnings: true,
@@ -22,7 +25,10 @@ const command = new Command('warn', async (message) => {
 
     await prisma.member.upsert({
         where: {
-            id: mentioned.id,
+            id_guildId: {
+                id: mentioned.id,
+                guildId: mentioned.guild.id
+            }
         },
         create: {
             id: mentioned.id,

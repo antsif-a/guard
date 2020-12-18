@@ -13,9 +13,9 @@ model Guild {
 }
 
 model Member {
-    id       String @id
+    id       String
     guildId  String
     warnings Int    @default(0)
 
-    @@unique([id, guildId])
+    @@id([id, guildId])
 }

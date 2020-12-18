@@ -1,22 +1,26 @@
 import { Command } from 'core/commands';
+import { prisma } from 'core/prisma';
 
-const command = new Command('warnings', (message, username) => {
-    const member = message.mentions.members.first();
+const command = new Command('warnings', async (message) => {
+    const mentioned = message.mentions.members.first();
 
-    if (!username || !member) return void message.channel.send('No user provided!');
+    if (!mentioned) {
+        await message.channel.send('No user provided!');
+        return;
+    }
 
-    // GuardBot.database.all(Sql.get('warnings'), [member.id, member.guild.id], (err, rows) => {
-    //     if (err) console.error(err);
-    //     if (!rows.length) {
-    //         void channel.send(`User '${member.user.username}' has 0 warnings.`);
-    //     } else {
-    //         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    //         const warnings: number = rows[0].warnings;
-    //         void channel.send(`User '${member.user.username}' has ${warnings} ${warnings == 1
-    //             ? 'warning'
-    //             : 'warnings'}.`);
-    //     }
-    // });
+    const member = await prisma.member.findUnique({
+        where: {
+            id_guildId: {
+                id: mentioned.id,
+                guildId: mentioned.guild.id
+            }
+        }
+    });
+
+    const warnings = member ? member.warnings : 0;
+
+    await message.channel.send(`User ${mentioned.user.username} has ${warnings} warnings.`);
 });
 
 command.permissions.push("MANAGE_MESSAGES");
