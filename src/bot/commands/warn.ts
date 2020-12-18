@@ -13,8 +13,8 @@ const command = new Command('warn', async (message) => {
         where: {
             id_guildId: {
                 id: mentioned.id,
-                guildId: mentioned.guild.id
-            }
+                guildId: mentioned.guild.id,
+            },
         },
         select: {
             warnings: true,
@@ -27,8 +27,8 @@ const command = new Command('warn', async (message) => {
         where: {
             id_guildId: {
                 id: mentioned.id,
-                guildId: mentioned.guild.id
-            }
+                guildId: mentioned.guild.id,
+            },
         },
         create: {
             id: mentioned.id,

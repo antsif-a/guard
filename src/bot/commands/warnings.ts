@@ -13,9 +13,9 @@ const command = new Command('warnings', async (message) => {
         where: {
             id_guildId: {
                 id: mentioned.id,
-                guildId: mentioned.guild.id
-            }
-        }
+                guildId: mentioned.guild.id,
+            },
+        },
     });
 
     const warnings = member ? member.warnings : 0;

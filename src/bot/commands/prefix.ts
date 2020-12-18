@@ -12,7 +12,7 @@ const command = new Command('prefix', async (message, newPrefix) => {
     });
 
     if (!newPrefix) {
-        await message.channel.send(`Invalid arguments! Usage: \`${prefix}prefix <prefix>\``);
+        await message.channel.send(`Invalid arguments! Usage: \`${prefix}prefix <prefix>\`.`);
         return;
     }
 

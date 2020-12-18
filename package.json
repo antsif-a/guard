@@ -15,7 +15,7 @@
         "build:tsc": "tsc",
         "run:dev": "yarn env ts-node ./src/index.ts",
         "env": "cross-env NODE_PATH=./src",
-        "eslint": "eslint .",
+        "eslint": "eslint ./src",
         "test": "tsc",
         "prisma": "prisma",
         "prisma:migrate": "prisma migrate --preview-feature"

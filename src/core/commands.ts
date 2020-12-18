@@ -43,8 +43,8 @@ export class Command {
      * @param message - A message that called this command.
      * @param args - Command args.
      */
-    run(message: Message, ...args: string[]): void {
-        return this.listener(message, ...args);
+    async run(message: Message, ...args: string[]): Promise<void> {
+        await this.listener(message, ...args);
     }
 }
 
@@ -108,7 +108,7 @@ export class CommandsHandler {
                         ? void await message.channel.send(this.getPermissionAlert(message, command))
                         : undefined;
                 }
-                command.run(message, ...args);
+                await command.run(message, ...args);
             }
         });
     }
@@ -172,7 +172,7 @@ export class CommandsHandler {
 
 type PermissionDeniedAlert = (message: Message, command: Command) => string;
 
-type CommandListener = (message: Message, ...args: string[]) => void;
+type CommandListener = (message: Message, ...args: string[]) => Promise<void>;
 
 /**
  * Example of command module.
