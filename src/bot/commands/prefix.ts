@@ -1,7 +1,7 @@
 import { Command } from 'core/commands';
 import { prisma } from 'core/prisma';
 
-const command = new Command('prefix', async (message, newPrefix) => {
+export default new Command('prefix', async (message, newPrefix) => {
     const { prefix } = await prisma.guild.findUnique({
         where: {
             id: message.guild.id,
@@ -26,8 +26,4 @@ const command = new Command('prefix', async (message, newPrefix) => {
     });
 
     await message.channel.send(`Prefix set to "${newPrefix}"!`);
-});
-
-command.permissions.push('MANAGE_MESSAGES');
-
-export default command;
+}).permission('MANAGE_MESSAGES');

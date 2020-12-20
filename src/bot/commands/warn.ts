@@ -1,7 +1,7 @@
 import { Command } from 'core/commands';
 import { prisma } from 'core/prisma';
 
-const command = new Command('warn', async (message) => {
+export default new Command('warn', async (message) => {
     const mentioned = message.mentions.members.first();
 
     if (!mentioned) {
@@ -41,8 +41,4 @@ const command = new Command('warn', async (message) => {
     });
 
     await message.channel.send(`User '${mentioned.user.username}' has been warned ${warnings} times.`);
-});
-
-command.permissions.push("MANAGE_MESSAGES");
-
-export default command;
+}).permission('MANAGE_MESSAGES');

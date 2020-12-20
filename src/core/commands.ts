@@ -28,6 +28,12 @@ export class Command {
         this.permissions = [];
     }
 
+    permission(...permissions: PermissionString[]): Command {
+        this.permissions.push(...permissions);
+
+        return this;
+    }
+
     checkPermissions(member: GuildMember): boolean {
         for (const p of this.permissions) {
             if (!member.hasPermission(p)) {
