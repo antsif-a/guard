@@ -53,5 +53,3 @@
     >
   </a>
 </p>
-
-Guard is a modern Discord bot designed for easy and comfortable moderation.
